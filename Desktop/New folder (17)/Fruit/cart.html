@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      
+    </style>
+</head>
+<body>
+    <div id="cart"></div>
+</body>
+</html>
+<script>
+
+let addition = JSON.parse(localStorage.getItem("f_Cart_Data"));
+addition.forEach(function(elem,index){
+    let box=document.createElement("div");
+
+    let img = document.createElement("img");
+        img.src=elem.img;
+
+    let name = document.createElement("h2");
+    name.innerText=elem.name;
+
+    let price = document.createElement("h4")
+    price.innerText=elem.price;
+
+    let pic = document.createElement("p");
+    pic.innerText=elem.pic;
+
+    let removebtn= document.createElement("button");
+    removebtn.innerText="remove";
+
+    removebtn.setAttribute("class","remove")
+    removebtn.addEventListener("click",function(){
+        addition.splice(index,1)
+        localStorage.setItem("f_Cart_Data",JSON.stringify(addition))
+        window.location.reload()
+    })
+    box.append(img,name,pic,price,removebtn)
+    let container=document.getElementById("cart")
+    container.append(box)
+})
+
+/*
+ls.get item cartdat store in var
+span-> id
+ call span_Id
+spanId .innertext= cartadata.length
+ */
+
+
+
+
+</script>

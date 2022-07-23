@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            width: 65%;
+            margin-left: 25%;
+            height: auto;
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            grid-template-rows: repeat(4,auto);
+            gap: 20px;
+        }
+        .empty{
+          margin-top:50px;
+          /* border: 1px solid red; */
+        }
+
+        #navbar{
+        height: 75px;
+        width: 90%;
+        border: 1px solid;
+        display: flex;
+        justify-content: flex-end;
+      }
+      #navbar > div {
+        margin-left: 5%;
+        font-size: x-large;
+      }
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <div>login</div>
+      <div>Sign-Up</div>
+      <div><a id="cart" href="./cart.html">Cart</a><span id="cartCounter"></span></div>
+    </div>
+      <div id="container"></div>
+ 
+</body>
+</html>
+<script>
+
+fruitData=[
+{ 
+        img: " https://imageprod.fraazo.com/fraazo-prod/products/product_images/000/000/157/original/data?width=256&height=256" ,        
+        name:"Pineapple ",
+        pic:"1 pkt  ",
+        price:"  32" ,      
+  },  
+  { 
+        img: "https://imagemaster.fraazo.com/fraazo-master/products/FBAN14.png?width=256&height=256 " ,        
+        name:"Robusta Banana ",
+        pic:"1 pc ",
+        price:"  39" ,      
+  },
+  { 
+        img: "https://imageprod.fraazo.com/fraazo-prod/products/product_images/000/000/006/original/data?width=256&height=256 " ,        
+        name:"Royal gala apple ",
+        pic:" 4 pc",
+        price:"  154" ,      
+  },
+  { 
+        img: " https://imagemaster.fraazo.com/fraazo-master/products/FMOS13.png?width=256&height=256" ,        
+        name:"Mosambi ",
+        pic:"1 kg ",
+        price:" 93 " ,      
+  },
+  { 
+        img: "https://imagemaster.fraazo.com/fraazo-master/products/FBAN24.png?width=256&height=256 " ,        
+        name:" Elaichi Banana (Yellaki)",
+        pic:"500 gm ",
+        price:" 76 " ,      
+  },  
+  { 
+        img: " https://imagemaster.fraazo.com/fraazo-master/products/FCOC1.png?width=256&height=256" ,        
+        name:" Coconut",
+        pic:" 1 pc",
+        price:"  35" ,      
+  },
+  { 
+        img: " https://imagemaster.fraazo.com/fraazo-master/products/FMUS1.png?width=256&height=256" ,        
+        name:" Muskemelon",
+        pic:" 1 pc",
+        price:" 45 " ,      
+  },
+  { 
+        img: "https://imageprod.fraazo.com/fraazo-prod/products/product_images/000/000/117/original/data?width=256&height=256 " ,        
+        name:"Water Melon ",
+        pic:" 1 pc",
+        price:" 34" ,      
+  },
+  { 
+        img: "https://imageprod.fraazo.com/fraazo-prod/products/product_images/000/000/365/original/data?width=256&height=256 " ,        
+        name:"Langra Mango ",
+        pic:" 1 kg",
+        price:"  142" ,      
+  },
+  { 
+        img: "https://imageprod.fraazo.com/fraazo-prod/products/product_images/000/000/117/original/data?width=256&height=256 " ,        
+        name:"Water Melon ",
+        pic:" 1 pc",
+        price:" 34" ,      
+  },  
+  { 
+        img: " https://imageprod.fraazo.com/fraazo-prod/products/product_images/000/000/158/original/data?width=256&height=256" ,        
+        name:"Mango Chausa ",
+        pic:"1 kg ",
+        price:" 134" ,      
+  },
+]
+
+
+
+
+localStorage.setItem("fData",JSON.stringify(fruitData));
+
+// 
+// container.innerHTML =null;
+fruitData.forEach(function(elem){
+
+    let box = document.createElement("div");
+    box.setAttribute("class","empty")
+
+    let img = document.createElement("img");
+    img.setAttribute("src",elem.img);
+
+    // create new  div element
+    // set attr. class (set peroperties to class in css) ---> 
+    let name = document.createElement("h2");
+    name.innerText=elem.name;
+
+    let price = document.createElement("h4");
+    price.innerText=elem.price;
+
+     let pic = document.createElement("p");
+    pic.innerText=elem.pic;
+
+    let btn = document.createElement("button")
+    btn.innerText="Add To Cart";
+    btn.addEventListener("click",function(){
+        addToCart(elem);
+    })
+    // append name, price, pic,btn
+
+    box.append(img,name,pic,price,btn);  // box--> append-->img,new div
+    document.querySelector("#container").append(box);
+  
+})
+
+function addToCart(elem){
+let fData=JSON.parse(localStorage.getItem("f_Cart_Data")) || [];
+console.log(elem)
+fData.push(elem);
+localStorage.setItem("f_Cart_Data",JSON.stringify(fData));
+//  noItem = JSON.parse(localStorage.getItem("f_Cart_Data")).length;
+showCart();
+}
+
+function showCart(){
+  let noItem = JSON.parse(localStorage.getItem("f_Cart_Data")) || [];
+document.getElementById("cartCounter").innerText = noItem.length;
+
+}
+showCart();
+
+
+</script>
